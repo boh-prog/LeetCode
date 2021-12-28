@@ -1,0 +1,55 @@
+/**
+##Easy
+Given a string s consisting of some words separated by some number of spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+
+Example 2:
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+
+Example 3:
+
+Input: s = "luffy is still joyboy"
+Output: 6
+Explanation: The last word is "joyboy" with length 6.
+
+
+**/
+
+class Solution 
+{
+    public int lengthOfLastWord(String s) 
+    {
+        //Alternate Algorithm
+//         String[] words = s.split("\\W+");
+        
+//         String lastWord = words[words.length - 1];
+        
+//         return lastWord.length();
+        
+        int lengthOfString, lastWordLength = 0;
+        
+        s = s.strip();
+        lengthOfString = s.length(); //get length of string s
+        
+        //loop and count from the last index in string till you count all characters in the last word in string.
+         for(int i=lengthOfString-1; i>=0;  i--)
+         {
+             if(s.charAt(i) !=' ')
+                 lastWordLength = lastWordLength + 1;
+             else
+                 break;
+         }
+
+         return lastWordLength;
+    }
+
+}
