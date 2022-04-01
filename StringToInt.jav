@@ -74,8 +74,11 @@ class Solution
         //check after the loop, if val is with -2^31 and 2^31-1 range.
         // Having problems with integer overflowing and changing into a new int
         
-        //
-        
+        //for a single non numeric string
+        if(s.length() == 1 &&  s.matches("^[0-9]")) { return s.charAt(0)-'0';}
+        else if(s.length() == 1 &&  !s.matches("^[0-9]")) return 0;
+        else
+        {
         for(int i =0; i<s.length(); i++)
         {
             //get character in string
@@ -109,7 +112,8 @@ class Solution
                 
                     //break loop if a non-Numeric charac is found before or inbetween numeric characters
                     else if(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c != '\s') break;
-         
+                
+                    
              }
             
             //breaks loop after all numeric values have been read
@@ -120,5 +124,6 @@ class Solution
         }
         
         return val;
+        }
     }
 }
