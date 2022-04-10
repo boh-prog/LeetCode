@@ -1,0 +1,128 @@
+class Solution 
+{
+    
+   /**
+    BELLOW IS MY SECOND ATTEMPT ON THIS PROBLEM
+ **/  
+
+    public int myAtoi(String s) 
+    {
+        //instantiate final value   //instantiate start indx    //assume sign of integer is positive
+        int val = 0;                int startIndx=0;             int sign = 1; 
+        
+        //remove all white space at beginning and end of string
+        s = s.trim();
+        
+         if(s.length() <= 1 &&  s.matches("^[0-9]")) {return s.charAt(0)-'0';}
+         else if(s.length() <= 1 &&  !s.matches("^[0-9]")) return 0;
+        
+        else
+        {
+            //check for sign at start of numeric value
+            if(s.charAt(startIndx) == '-') 
+            {
+                sign = -1; startIndx =1;
+            }
+            else if(s.charAt(startIndx) == '+') startIndx = 1; //positive sign is the default, so move start indx
+
+            //loop through string and get numeric values
+            for(int i = startIndx; i<s.length(); i++)
+            {
+                
+                //In case of non numeric value where return the current calculated "val"
+                if( !(s.charAt(i) >= '0' && s.charAt(i) <='9') )
+                {
+                    return val * sign;
+                }
+
+                //check if Val is whithin range [-2^31, 2^31-1]
+                
+                
+                if(val > Integer.MAX_VALUE/10) 
+                {
+                    //Underflow
+                    if(sign == -1) return Integer.MIN_VALUE;
+                    //OverFlow
+                    return Integer.MAX_VALUE;
+                }
+                
+                else if( (val == Integer.MAX_VALUE/10))
+                {
+                     //OverFlow
+                    if((sign == 1) && !(s.charAt(i) >= '0' && s.charAt(i) <='7')) return Integer.MAX_VALUE;
+                     //Underflow
+                    if((sign == -1) && !(s.charAt(i) >= '0' && s.charAt(i) <='8')) return Integer.MIN_VALUE;
+                }
+            
+                //if character is numeric, convert to int and add to val 
+                val = (val * 10) + s.charAt(i) - '0';
+            }
+        
+            return val * sign;
+        }
+        
+        
+        
+ /**
+ BELLOW IS MY FIRST ATTEMPT ON THIS PROBLEM
+ 
+ **/
+        
+        //When string is single charac
+//         if(s.length() == 1 &&  s.matches("^[0-9]")) {return s.charAt(0)-'0';}
+//         else if(s.length() == 1 &&  !s.matches("^[0-9]")) return 0;
+//         else
+//         {
+//             for(int i =0; i<s.length(); i++)
+//             {
+//                 //get character in string
+//                 char c = s.charAt(i);
+
+//                 if (c >= '0' && c <= '9')
+//                 {
+
+//                     if((val >= Integer.MAX_VALUE/10)  ||  (val >= Integer.MAX_VALUE/10 + 7 ) )  return Integer.MAX_VALUE;
+
+//                     else if((val <= Integer.MIN_VALUE/10)  ||  (val <= Integer.MIN_VALUE/10 - 8)) return Integer.MIN_VALUE;
+
+
+//                     //add next numeric value to val; Note, multiplying by 'sign' to keep the sign of the integer  
+//                     val = (val * 10) + sign * (c - '0');
+
+//                 }
+                
+                
+//                 //edge case for non numeric charac between characs
+//                 else if (i>0 && (s.charAt(i-1)>='0' && s.charAt(i-1)<='9') ) break;
+
+//                 //check on non numeric characs
+//                 else if (!(c >= '0' && c <= '9'))
+//                  {
+//                         // System.out.println(c);
+//                     //check for sign of numeric charac
+//                         if( c == '-' && (s.charAt(i+1)!='+') )  //s.charAt(i+1) != '-' 
+//                         {
+//                             sign = -1;  //convert sign to negative
+//                             continue;
+//                         }
+//                         if( c == '+' && (s.charAt(i+1) != '-' ) )  continue; //|| s.charAt(i+1)!='+'
+
+
+//                         //break loop if a non-Numeric charac is found before or inbetween numeric characters
+//                         else if(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c != '\s') break;
+
+
+//                  }
+
+//                 //breaks loop after all first numeric values have been read
+//                 else if ( (c >= '0' && c <= '9') && !(s.charAt(i+1)>='0' && s.charAt(i+1)<='9' ) )
+//                 {
+//                     break;
+//                 }
+//             }
+
+//             return val;
+//         }
+        
+    }
+}
