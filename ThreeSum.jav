@@ -26,7 +26,7 @@ class Solution
 {
     public List<List<Integer>> threeSum(int[] nums) 
     {
-        if(nums.length<3) return null;
+        //if(nums.length<3) return null;
         
         Arrays.sort(nums);
         
